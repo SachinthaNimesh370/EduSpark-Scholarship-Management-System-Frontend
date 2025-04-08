@@ -1,12 +1,73 @@
-# React + Vite
+# 🎓 EduSpark – Scholarship Management System (Frontend)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+EduSpark is a modern web application designed to manage the end-to-end workflow of scholarship programs within universities. This frontend is developed using **React.js** and provides interfaces for students, scholarship coordinators, lecturers, and providers to interact with the system efficiently.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📌 Features
 
-## Expanding the ESLint configuration
+### 👥 User Roles
+- **Student** – Apply for scholarships, upload required documents, and track application status.
+- **Scholarship Coordinator** – Create and manage scholarship programs, review and approve applications.
+- **Lecturer** – Provide recommendations or review student performance.
+- **Scholarship Provider** – Sponsor and monitor scholarship disbursement.
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 📝 Scholarship Management
+- Register scholarships with eligibility criteria, deadlines, and fund amounts.
+- Manage student applications and application status.
+
+### 🎯 Application Process
+- Apply for multiple scholarships.
+- Upload personal documents (ID, financial proof, family details).
+- Track application status through real-time notifications.
+
+### ✅ Verification & Review
+- Automated eligibility checking.
+- Committee review and shortlisting of applications.
+- Final approval and awarding process.
+
+### 💸 Fund Disbursement
+- Track scholarship payments and transactions.
+- Update disbursement status and history records.
+
+### 🔔 Notification System
+- Real-time updates for students on application progress.
+
+---
+
+## 🧭 Workflow
+
+1. **Scholarship Registration**
+   - Coordinator creates scholarship programs with full details.
+
+2. **Student Application Submission**
+   - Students submit applications and required documents.
+
+3. **Eligibility Verification**
+   - System checks eligibility and shortlists valid applicants.
+
+4. **Committee Review & Approval**
+   - Applications reviewed and approved by scholarship committee.
+
+5. **Fund Disbursement**
+   - Funds sent to selected students and transaction data stored.
+
+6. **Reporting**
+   - Generate records of awarded students and payment history.
+
+---
+
+## 🚀 Tech Stack
+
+- **Frontend**: React.js
+- **Routing**: React Router
+- **State Management**: Context API / Redux (if used)
+- **UI Library**: MUI (Material UI)
+- **Form Handling**: React Hook Form / Formik
+- **HTTP Requests**: Axios
+- **Authentication**: JWT-based (from backend)
+
+---
+
+## 📁 Project Structure
+
