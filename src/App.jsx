@@ -1,11 +1,12 @@
 import { useState } from 'react'
+import RegisterPage from './pages/auth/RegisterPage'
 
 
 function App() {
   
   return (
     <>
-      
+      <RegisterPage/>
     </>
   )
 }
