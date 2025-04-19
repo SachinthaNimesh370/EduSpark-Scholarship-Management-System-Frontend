@@ -1,7 +1,7 @@
 import React from 'react';
 import TextField from '@mui/material/TextField';
 
-function InputField({ id, label, type, autoComplete }) {
+function InputField({ id, label, type, autoComplete, onChange, value }) {
   return (
     <TextField
       id={id}
@@ -11,6 +11,8 @@ function InputField({ id, label, type, autoComplete }) {
       margin="normal"
       fullWidth
       autoComplete={autoComplete}
+      onChange={onChange}
+      value={value}
     />
   );
   
