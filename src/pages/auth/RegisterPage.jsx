@@ -1,20 +1,8 @@
 import React from 'react'
-import { Box, Grid, TextField,InputLabel,Select,OutlinedInput,MenuItem,FormControl } from '@mui/material';
+import { Box, Grid,InputLabel,Select,OutlinedInput,MenuItem,FormControl } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
 function RegisterPage() {
-    function InputField({ label, type, id }) {
-        return (
-          <TextField
-            id={id}
-            label={label}
-            type={type}
-            variant="outlined"
-            margin="none" 
-            fullWidth
-          />
-        );
-    }
 
 
     //Start Role Selectoer

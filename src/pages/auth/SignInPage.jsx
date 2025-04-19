@@ -1,23 +1,11 @@
 import React from 'react';
-import { Box, Grid, TextField, Button,Typography } from '@mui/material';
+import { Box, Grid, Button,Typography } from '@mui/material';
 import useStyles from './SignInStyles'; // Import the styles
+import { InputField } from '../../component';
+import axios from 'axios';
 
 function SignInPage() {
   const classes = useStyles();
-
-  function InputField({ id, label, type, autoComplete }) {
-    return (
-      <TextField
-        id={id}
-        label={label}
-        type={type}
-        variant="outlined"
-        margin="none"
-        fullWidth
-        autoComplete={autoComplete}
-      />
-    );
-  }
 
   return (
     <Box className={classes.root}>
