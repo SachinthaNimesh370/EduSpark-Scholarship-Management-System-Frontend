@@ -13,6 +13,7 @@ function InputField({ id, label, type, autoComplete, onChange, value }) {
       autoComplete={autoComplete}
       onChange={onChange}
       value={value}
+      
     />
   );
   

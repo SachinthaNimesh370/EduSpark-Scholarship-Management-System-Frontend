@@ -1,105 +1,154 @@
-import React from 'react'
-import { Box, Grid,InputLabel,Select,OutlinedInput,MenuItem,FormControl } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
+import React, { useState } from 'react';
+import { Box, Grid, Button, Typography, MenuItem, Select, FormControl, InputLabel } from '@mui/material';
+import useStyles from './SignUpStyles';
+import axios from 'axios';
+import { InputField } from '../../component';
+import { useNavigate } from 'react-router-dom';
 
-function RegisterPage() {
 
 
-    //Start Role Selectoer
-    const ITEM_HEIGHT = 48;
-    const ITEM_PADDING_TOP = 8;
-    const MenuProps = {
-        PaperProps: {
-          style: {
-            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-            width: 250,
-          },
-        },
-      };
-      
-    function RoleSelector(){
-        const [role, setRole] = React.useState([]);
-        const theme = useTheme();
+function SignUpPage() {
+    const navigate = useNavigate();
+  const classes = useStyles();
 
-        const names = ['Provider','Cordinator','Lecturer','Student' ];
-          
-        function getStyles(name, role, theme) {
-            return {
-              fontWeight: role.includes(name)
-                ? theme.typography.fontWeightMedium
-                : theme.typography.fontWeightRegular,
-            };
-        }
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    role: '',  
+    password: '',
+    confirmPassword: '',
+     
+  });
 
-        const handleChange = (event) => {
-            setRole(event.target.value); // Single string value
-        };
-        return(
-            <>
-                <FormControl fullWidth>
-                    <InputLabel id="role-selector-label">Role</InputLabel>
+  const handleChange = (e) => {
+    setFormData(prev => ({
+      ...prev,
+      [e.target.id]: e.target.value,
+    }));
+  };
 
-                    <Select
-                        labelId="role-selector-label"
-                        id="selected"
-                        value={role}
-                        onChange={handleChange}
-                        input={<OutlinedInput label="Role" />}
-                        MenuProps={MenuProps}
-                    >
-                        <MenuItem value="">
-                            <em>Select a role</em>
-                        </MenuItem>
+  const handleRoleChange = (e) => {
+    setFormData(prev => ({
+      ...prev,
+      role: e.target.value,
+    }));
+  };
 
-                        {names.map((name) => (
-                            <MenuItem
-                                key={name}
-                                value={name}
-                                style={getStyles(name, role, theme)}
-                            >
-                                {name}
-                            </MenuItem>
-                        ))}
-                    </Select>
-                </FormControl>
-            </>
-        )
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (formData.password !== formData.confirmPassword) {
+      alert('Passwords do not match');
+      return;
     }
-    //Finish Role Selector
+
+    try {
+      const response = await axios.post('http://localhost:8090/api/v1/user/signup', formData);
+      console.log('Sign Up Success:', response.data);
+      
+    } catch (error) {
+      console.error('Sign Up Error:', error.response?.data || error.message);
+    }
+  };
 
   return (
-    <Box>
-        <Grid container rowSpacing={2} columnSpacing={2} >
-        {/* First Name and Last Name in the same row */}
-            <Grid  size={6}>
-                <InputField id="fname" label="First Name" type="text" />
-            </Grid>
-            <Grid size={6}>
-                <InputField id="lname" label="Last Name" type="text"/>
-            </Grid>
-            <Grid size={12} >
-                <InputField id="email"  label="Email" type="email" />
-            </Grid>
+    <Box className={classes.root}>
+      <Box className={classes.card}>
+        <Typography
+            variant="h4"
+            align="center"
+            gutterBottom
+            sx={{ fontWeight: 'bold', marginBottom: 4 }}
+        >
+          Sign Up
+        </Typography>
 
-            <Grid size={12} >
-                <RoleSelector />
-            </Grid>
+        <form onSubmit={handleSubmit}>
+          <Grid container spacing={1} className={classes.inputWrapper}>
+            
+              <InputField
+                id="name"
+                label="User Name"
+                type="text"
+                autoComplete="off"
+                onChange={handleChange}
+                value={formData.name}
+              />
+            
 
-            <Grid size={12} >
-                <InputField id="conPassword" label="Password" type="password"  />
-            </Grid>
-            <Grid size={12} >
-                <InputField id="password" label="Confirm Password" type="password" />
-            </Grid>
+            
+              <InputField
+                id="email"
+                label="Email"
+                type="email"
+                autoComplete="email"
+                onChange={handleChange}
+                value={formData.email}
+              />
 
-        </Grid>
-      
-        
+                <FormControl fullWidth className={classes.selectControl}>
+                <InputLabel id="role-label">Select Role</InputLabel>
+                <Select
+                  labelId="role-label"
+                  value={formData.role}
+                  label="Select Role"
+                  onChange={handleRoleChange}
+                >
+                  <MenuItem value="student">Student</MenuItem>
+                  <MenuItem value="lecturer">Lecturer</MenuItem>
+                  <MenuItem value="admin">Admin</MenuItem>
+                </Select>
+              </FormControl>
+            
 
+            
+              <InputField
+                id="password"
+                label="Password"
+                type="password"
+                autoComplete="new-password"
+                onChange={handleChange}
+                value={formData.password}
+              />
+            
 
-        
+            
+              <InputField
+                id="confirmPassword"
+                label="Confirm Password"
+                type="password"
+                autoComplete="new-password"
+                onChange={handleChange}
+                value={formData.confirmPassword}
+              />
+            
+
+            {/* NEW Role Selector */}
+            
+              
+            
+
+          </Grid>
+
+          <Grid item xs={12} className={classes.buttonWrapper}>
+            <Button 
+                onClick={() => navigate('/')} 
+                className={classes.signInButton}>
+              Already have an account?
+            </Button>
+
+            <Button
+              type="submit"
+              variant="contained"
+              className={classes.signUpButton}
+            >
+              Register
+            </Button>
+          </Grid>
+        </form>
+      </Box>
     </Box>
-  )
+  );
 }
 
-export default RegisterPage
+export default SignUpPage;

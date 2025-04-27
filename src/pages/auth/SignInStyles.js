@@ -19,6 +19,8 @@ const useStyles = makeStyles({
   },
   inputWrapper: {
     marginBottom: '24px',
+    
+    
   },
   text:{
     variant:"h5" ,
@@ -26,12 +28,18 @@ const useStyles = makeStyles({
   },
   buttonWrapper: {
     display: 'flex',
-    justifyContent: 'flex-end',
+    marginLeft:20,
+    marginRight:20
+    
   },
   button: {
-    textTransform: 'none',
+    
     borderRadius: 8,
     padding: '10px 24px',
+    width:'30%',
+    fontSize: '15px !important',
+    height:'40px',
+    
     backgroundColor: '#1976d2',
     '&:hover': {
       backgroundColor: '#115293',

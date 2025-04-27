@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
-import { Box, Grid, Button, Typography } from '@mui/material';
+import { Box, Grid,Button, Typography } from '@mui/material';
 import useStyles from './SignInStyles';
 import axios from 'axios';
-import { InputField } from '../../component';
+import { InputField} from '../../component';
+import { useNavigate } from 'react-router-dom';
+
+
 
 function SignInPage() {
+  const navigate = useNavigate();
   const classes = useStyles();
 
   const [formData, setFormData] = useState({
-    username: '',
+    userName: 'Sachintha',
     password: '',
   });
 
@@ -23,12 +27,11 @@ function SignInPage() {
     e.preventDefault();
 
     try {
-      const response = await axios.get('http://localhost:8090/api/v1/home/login', formData);
+      const response = await axios.post('http://localhost:8090/api/v1/user/signin', formData);
       console.log('Login Success:', response.data);
-      // handle success (e.g., redirect, show toast, save token)
+      
     } catch (error) {
       console.error('Login Error:', error.response?.data || error.message);
-      // handle error (e.g., show error message)
     }
   };
 
@@ -36,7 +39,7 @@ function SignInPage() {
     <Box className={classes.root}>
       <Box className={classes.card}>
         <Typography
-          variant="h5"
+          variant="h4"
           align="center"
           gutterBottom
           sx={{ fontWeight: 'bold', marginBottom: 4 }}
@@ -45,18 +48,17 @@ function SignInPage() {
         </Typography>
 
         <form onSubmit={handleSubmit}>
-          <Grid container spacing={2} className={classes.inputWrapper}>
-            <Grid item xs={12}>
+          <Grid container spacing={1} className={classes.inputWrapper}>
+            
               <InputField
-                id="username"
+                id="userName"
                 label="User Name"
                 type="text"
                 autoComplete="off"
                 onChange={handleChange}
-                value={formData.username}
+                value={formData.userName}
               />
-            </Grid>
-            <Grid item xs={12}>
+            
               <InputField
                 id="password"
                 label="Password"
@@ -65,17 +67,32 @@ function SignInPage() {
                 onChange={handleChange}
                 value={formData.password}
               />
-            </Grid>
+            
           </Grid>
-          <Grid item xs={12} className={classes.buttonWrapper}>
+          <Grid item xs={12} className={classes.buttonWrapper} sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 2 }}>
+            <Button onClick={() => navigate('/signup')}
+              sx={{fontSize: '15px',
+              display: 'flex',
+              alignSelf: 'flex-start',}}
+            >
+              Sign Up
+            </Button>
+
             <Button
               type="submit"
               variant="contained"
-              className={classes.button}
+              
+              // className={classes.button }
+              sx={{fontSize: '15px',
+                display: 'flex',
+                alignSelf: 'flex-end',}}
+              
+              
             >
               Sign In
             </Button>
           </Grid>
+         
         </form>
       </Box>
     </Box>
